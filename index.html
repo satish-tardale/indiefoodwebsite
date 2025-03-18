@@ -899,61 +899,74 @@
 
 
       <!-- Appointment Start -->
-<div class="container-xxl py-5" id="contact">
-    <div class="container">
-        <div class="bg-light rounded">
-            <div class="row g-0">
-                <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
-                    <div class="h-100 d-flex flex-column justify-content-center p-5">
-                        <h1 class="mb-4">Make Appointment</h1>
-                        <form id="appointmentForm">
-                            <div class="row g-3">
-                                <div class="col-sm-6">
-                                    <div class="form-floating">
-                                        <input type="text" class="form-control border-0" id="gname" placeholder="Guardian Name">
-                                        <label for="gname">Your Name</label>
+      <div class="container-xxl py-5" id="contact">
+        <div class="container">
+            <div class="bg-light rounded">
+                <div class="row g-0">
+                    <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
+                        <div class="h-100 d-flex flex-column justify-content-center p-5">
+                            <h1 class="mb-4">Make Appointment</h1>
+                            <form id="appointmentForm">
+                                <div class="row g-3">
+                                    <div class="col-sm-6">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control border-0" id="gname" placeholder="Guardian Name" required>
+                                            <label for="gname">Your Name</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-floating">
+                                            <input type="email" class="form-control border-0" id="gmail" placeholder="Guardian Email" required>
+                                            <label for="gmail">Your Email</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-floating">
+                                            <select class="form-control border-0" id="cname" required>
+                                                <option value="" disabled selected>Select a Product</option>
+                                                <option value="Peanut Butter">Peanut Butter</option>
+                                                <option value="Garlic Powder">Garlic Powder</option>
+                                                <option value="Onion Powder">Onion Powder</option>
+                                                <option value="Moringa Powder">Moringa Powder</option>
+                                                <option value="Turmeric Powder">Turmeric Powder</option>
+                                                <option value="Ginger Powder">Ginger Powder</option>
+                                                <option value="Neem Powder">Neem Powder</option>
+                                                <option value="Beetroot Powder">Beetroot Powder</option>
+                                                <option value="Coriander Powder">Coriander Powder</option>
+                                            </select>
+                                            <label for="cname">Product Name</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-floating">
+                                            <input type="tel" class="form-control border-0" id="cage" placeholder="Phone Number" required>
+                                            <label for="cage">Phone Number</label>
+                                            <small id="phoneError" class="text-danger d-block mt-1" style="display: none;">Enter a valid 10-digit phone number.</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-floating">
+                                            <textarea class="form-control border-0" placeholder="Leave a message here" id="message" style="height: 100px"></textarea>
+                                            <label for="message">Message</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <button class="btn btn-primary w-100 py-3" type="submit">Submit</button>
                                     </div>
                                 </div>
-                                <div class="col-sm-6">
-                                    <div class="form-floating">
-                                        <input type="email" class="form-control border-0" id="gmail" placeholder="Guardian Email">
-                                        <label for="gmail">Your Email</label>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-floating">
-                                        <input type="text" class="form-control border-0" id="cname" placeholder="Child Name">
-                                        <label for="cname">Product Name</label>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-floating">
-                                        <input type="text" class="form-control border-0" id="cage" placeholder="Child Age">
-                                        <label for="cage">Phone Number</label>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-floating">
-                                        <textarea class="form-control border-0" placeholder="Leave a message here" id="message" style="height: 100px"></textarea>
-                                        <label for="message">Message</label>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <button class="btn btn-primary w-100 py-3" type="submit">Submit</button>
-                                </div>
-                            </div>
-                        </form>
+                            </form>
+                        </div>
                     </div>
-                </div>
-                <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s" style="min-height: 400px;">
-                    <div class="position-relative h-100">
-                        <img class="position-absolute w-100 h-100 rounded" src="img/DALL·E 2025-03-10 11.01.34 - A high-definition advertisement banner for 'Indiefood Processing Industries'. The design should match the provided image, replacing Marathi text with .png" style="height: 300px; width: 300px;">
+                    <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s" style="min-height: 400px;">
+                        <div class="position-relative h-100">
+                            <img class="position-absolute w-100 h-100 rounded" src="img/DALL·E 2025-03-10 11.01.34 - A high-definition advertisement banner for 'Indiefood Processing Industries'. The design should match the provided image, replacing Marathi text with .png" style="height: 300px; width: 300px;">
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+    
 <!-- Appointment End -->
 
 
@@ -1185,7 +1198,7 @@
       emailjs.send("service_d6t4cft", "template_mh9sykg", emailData)
         .then(function (response) {
           console.log("Email sent successfully", response);
-          alert("Your appointment has been submitted!");
+          alert("Your request is submited,we get back to you soon!");
         }, function (error) {
           console.error("Email sending failed", error);
           alert("Failed to submit your appointment. Please try again.");
@@ -1221,6 +1234,25 @@
                 alert("Failed to submit your email. Please try again.");
             });
     });
+
+
+
+
+//validation  for phone number 
+
+document.getElementById("cage").addEventListener("input", function() {
+    let phoneInput = document.getElementById("cage");
+    let phoneError = document.getElementById("phoneError");
+    let phonePattern = /^[0-9]{10}$/; // Regex for 10-digit number
+
+    if (!phonePattern.test(phoneInput.value)) {
+        phoneError.style.display = "block"; // Show error message
+        phoneInput.classList.add("border-danger"); // Highlight field
+    } else {
+        phoneError.style.display = "none"; // Hide error message
+        phoneInput.classList.remove("border-danger"); // Remove highlight
+    }
+});
 </script>
   
 
