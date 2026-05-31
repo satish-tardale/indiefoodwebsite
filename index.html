@@ -46,7 +46,12 @@
 
 
     <!-----mail js-->
-    <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <!-- Remove old: <script src="https://cdn.emailjs.com/sdk/2.3.2/email.min.js"></script> -->
+
+
+
+
+
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
@@ -103,22 +108,30 @@
 
        <!-- Navbar Start -->
 <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top px-4 px-lg-5 py-lg-0">
-    <a href="index.html" class="navbar-brand">
-        <img src="img/new_logo_indi.png" alt="logo" style="height: 80px; width: 100px;"/>
+    <!-- Logo -->
+    <a href="#index" class="navbar-brand">
+        <img src="img/new_logo_indi.png" alt="logo" style="height: 80px; width: 100px;">
     </a>
-    <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+
+    <!-- Hamburger button for mobile -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
         <span class="navbar-toggler-icon"></span>
     </button>
+
+    <!-- Collapsible nav container -->
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <div class="navbar-nav mx-auto">
-            <a href="#index" class="nav-item nav-link active" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">Home</a>
-            <a href="#about" class="nav-item nav-link" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">About Us</a>
-            <a href="#product" class="nav-item nav-link" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">Product</a>
-            <a href="#contact" class="nav-item nav-link" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">Contact Us</a>
+            <a href="#index" class="nav-item nav-link active">Home</a>
+            <a href="#about" class="nav-item nav-link">About Us</a>
+            <a href="#product" class="nav-item nav-link">Product</a>
+            <a href="#contact" class="nav-item nav-link">Contact Us</a>
         </div>
-        <a href="#contact" class="btn btn-primary rounded-pill px-3 d-none d-lg-block">Join Us<i class="fa fa-arrow-right ms-3"></i></a>
+        <a href="#contact" class="btn btn-primary rounded-pill px-3 d-none d-lg-block">
+            Join Us <i class="fa fa-arrow-right ms-3"></i>
+        </a>
     </div>
 </nav>
+
 <!-- Navbar End -->
 
 
@@ -1190,117 +1203,151 @@
     });
 </script>
 
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
-    // Initialize EmailJS with your user ID
-    emailjs.init("5Nnq0GWKP6ZcgyHkY");
-  
-    // Get the form and add an event listener
+  // Initialize EmailJS with your Public Key (from EmailJS dashboard)
+  (function() {
+    emailjs.init({
+      publicKey: "5Nnq0GWKP6ZcgyHkY"  // Example: "5Nnq0GWKP6ZcgyHkY"
+    });
+  })();
+</script>
+
+<!-- Include EmailJS SDK (latest version) -->
+<script>
+  // Initialize EmailJS with public key
+  (function(){
+    emailjs.init({ publicKey: "5Nnq0GWKP6ZcgyHkY" }); 
+  })();
+
+  document.addEventListener("DOMContentLoaded", function () {
     const form = document.getElementById("appointmentForm");
+
     form.addEventListener("submit", function (event) {
-      event.preventDefault(); // Prevent form from default submission
-  
-      // Get values from form fields
+      event.preventDefault();
+
       const guardianName = document.getElementById("gname").value;
       const guardianEmail = document.getElementById("gmail").value;
       const childName = document.getElementById("cname").value;
       const phoneNumber = document.getElementById("cage").value;
       const message = document.getElementById("message").value;
-  
-      // Admin Notification Email Data
+
+      // Data for admin email template
       const adminEmailData = {
         guardian_name: guardianName,
-        guardian_email: guardianEmail, 
+        guardian_email: guardianEmail,
         child_name: childName,
         phone_number: phoneNumber,
         message: message,
         to_email: "indiefood2022@gmail.com"
       };
-  
-      // Welcome Email Data for the user
+
+      // Data for user welcome email template
       const userEmailData = {
         guardian_name: guardianName,
-        user_email: guardianEmail,  // User's email
+        user_email: guardianEmail,
         child_name: childName
       };
-  
-      // Send the email to admin
+
+      // Send email to admin first
       emailjs.send("service_d6t4cft", "template_mh9sykg", adminEmailData)
         .then(function (response) {
-          console.log("Admin email sent successfully", response);
-  
-          // Send the welcome email to the user
+          console.log("Admin email sent successfully:", response);
+
+          // Send welcome email to user
           return emailjs.send("service_d6t4cft", "template_x2pq2pu", userEmailData);
         })
         .then(function (response) {
-          console.log("Welcome email sent successfully", response);
-          alert("Your request is submitted. We will get back to you soon!");
+          console.log("Welcome email sent successfully:", response);
+          alert("Your request has been submitted. We will get back to you soon!");
+          form.reset();
         })
         .catch(function (error) {
           console.error("Error sending email:", error);
-          alert("Failed to submit your request. Please try again.");
+          alert("Failed to submit your request. Please try again later.");
         });
     });
-  </script>
+  });
+</script>
+
   
+
+
 <script>
-    // Initialize EmailJS
-    (function(){
-        emailjs.init("5Nnq0GWKP6ZcgyHkY");
-    })();
+  (function () {
+    emailjs.init({ publicKey: "5Nnq0GWKP6ZcgyHkY" });
+  })();
 
-    // Handle form submission
-    document.getElementById("emailForm").addEventListener("submit", function(event) {
-        event.preventDefault(); // Prevent default form submission
-        
-        const guardianEmail = document.getElementById("userEmail").value;
+  document.addEventListener("DOMContentLoaded", function () {
+    const emailForm = document.getElementById("emailForm");
 
-        // Prepare data for the first email
-        const emailData = {
-            guardian_email: guardianEmail,
-            to_email: "indiefood2022@gmail.com" // Destination email
-        };
+    emailForm.addEventListener("submit", function (event) {
+      event.preventDefault();
 
-        // Send the first email
-        emailjs.send("service_d6t4cft", "template_mh9sykg", emailData)
-            .then(function(response) {
-                console.log("First Email sent successfully", response);
-                
-                // Prepare data for the second email
-                const secondEmailData = {
-                    guardian_email: guardianEmail,
-                    to_email: guardianEmail, // Send to user
-                    reply_to: "indiefood2022@gmail.com"
-                };
+      const guardianEmail = document.getElementById("userEmail").value.trim();
 
-                // Send the second email
-                return emailjs.send("service_d6t4cft", "template_x2pq2pu", secondEmailData);
-            })
-            .then(function(response) {
-                console.log("Second Email sent successfully", response);
-                alert("Thank you! A confirmation email has been sent to your email.");
-                document.getElementById("emailForm").reset(); // Clear the form after submission
-            })
-            .catch(function(error) {
-                console.error("Email sending failed", error);
-                alert("Failed to send the email. Please try again.");
-            });
+      if (!guardianEmail) {
+        alert("Please enter a valid email address");
+        return;
+      }
+
+      // Fill all required template variables (dummy if not available)
+      const adminEmailData = {
+        guardian_name: "",         // empty as not collected in this form
+        guardian_email: guardianEmail,
+        child_name: "",            // empty as not collected
+        phone_number: "",          // empty as not collected
+        message: "",               // empty as not collected
+        to_email: "indiefood2022@gmail.com"
+      };
+
+      const userEmailData = {
+        guardian_name: "",
+        user_email: guardianEmail,
+        child_name: ""
+      };
+
+      // Send email to admin
+      emailjs.send("service_d6t4cft", "template_mh9sykg", adminEmailData)
+        .then(function (response) {
+          console.log("First email sent successfully:", response);
+
+          // Send confirmation email to user
+          return emailjs.send("service_d6t4cft", "template_x2pq2pu", userEmailData);
+        })
+        .then(function (response) {
+          console.log("Second email sent successfully:", response);
+          alert("Thank you! A confirmation email has been sent to your email.");
+          emailForm.reset();
+        })
+        .catch(function (error) {
+          console.error("Email sending failed:", error);
+          alert("Failed to send email. Please try again.");
+        });
     });
 
-    // Validation for phone number
-    document.getElementById("cage").addEventListener("input", function() {
-        let phoneInput = document.getElementById("cage");
-        let phoneError = document.getElementById("phoneError");
-        let phonePattern = /^[0-9]{10}$/; // Regex for 10-digit number
+    // Phone number validation for other form; safe to keep
+    const phoneInput = document.getElementById("cage");
+    if (phoneInput) {
+      phoneInput.addEventListener("input", function () {
+        const phoneError = document.getElementById("phoneError");
+        const phonePattern = /^[0-9]{10}$/;
 
         if (!phonePattern.test(phoneInput.value)) {
-            phoneError.style.display = "block"; // Show error message
-            phoneInput.classList.add("border-danger"); // Highlight field
+          if (phoneError) phoneError.style.display = "block";
+          phoneInput.classList.add("border-danger");
         } else {
-            phoneError.style.display = "none"; // Hide error message
-            phoneInput.classList.remove("border-danger"); // Remove highlight
+          if (phoneError) phoneError.style.display = "none";
+          phoneInput.classList.remove("border-danger");
         }
-    });
+      });
+    }
+  });
 </script>
+
+
+
 
 
   
